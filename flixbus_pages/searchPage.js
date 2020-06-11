@@ -1,44 +1,123 @@
 
 class SearchPage{
 
-    get pageTitle(){
-        return browser.getTitle();
+    get lowCostText() { return $('div.hero-module--content--1pOtd h1') }
+
+    waitForloginPageToLoad () {
+        if(!this.SearchPage.isDisplayed()){
+          this.SearchPage.waitForDisplayed(5000);
+        }
+      }
+
+    get pageTitle() { return browser.getTitle(); }
+
+    get cookieBanner() { return $$(`#cookie-consent-accept-all-button`); }
+
+    get departureCity() { return $('(//input[@type="text"])[1]'); }
+    
+    get arrivalCity(){ return $('(//input[@type="text"])[2]'); }
+
+    get dropdownList(){ return $('.Dropdown__dropdownList___sfiW6'); }
+
+    get departureDate(){ return $('(//input[@type="text"])[3]');}
+
+    get passengers() { return $('(//input[@type="text"])[4]'); }
+
+    get searchButton(){ return $('button.flix-btn') }
+
+    waitForSearchPageToLoad () {
+        if(!this.lowCostText.isDisplayed()){
+          this.contactUsText.waitForDisplayed(3000);
+        }
+      }
+
+    handleCookiesBanner(){
+        var existBanner = this.cookieBanner.length;
+        if(existBanner > 0){
+            console.log("count is :" + existBanner);
+            $(`#cookie-consent-accept-all-button`).click();
+        }
     }
 
-    get departureCity(){
-        return $('(//input[@type="text"])[1]').getText();
+    getDepartureCity(){
+        return this.departureCity.getProperty('value');
     }
 
-    get arrivalCity(){
-        return $('(//input[@type="text"])[2]').getText();
+    setDepartureCity(departureCity){ 
+        this.departureCity.setValue(departureCity);
+        browser.pause(500);
+        this.dropdownList.click();
+        browser.keys(['\ue015','\uE007']);
     }
 
-    get departureDate(){
-        return $('(//input[@type="text"])[3]').getText(); 
+    getArrivalCity(){
+        return this.arrivalCity.getProperty('value');
     }
 
-    get passengers(){
-        return $('(//input[@type="text"])[4]').getText(); 
+    setArrivalCity(arrivalCity){ 
+        this.arrivalCity.setValue(arrivalCity); 
+        browser.pause(500);
+        this.dropdownList.click();
+        browser.keys(['\ue015','uE007']);
     }
 
-    set departureCity(departureCity){
-         $('(//input[@type="text"])[1]').setValue(departureCity);
+    getDepartureDate(){
+        this.departureDate.getText();
     }
 
-    set arrivalCity(arrivalCity){
-         $('(//input[@type="text"])[2]').setValue(arrivalCity);
+    specificDate(index){
+        return  $(`//span[@data-date="${index}"]`);
+     }
+
+    setDepartureDate(departureDate){ 
+        this.departureDate.click(); 
+        browser.pause(500);
+        this.specificDate(departureDate).click();
     }
 
-    set departureDate(departureDate){
-         $('(//input[@type="text"])[3]').setValue(departureDate); 
+    getPassengers(){
+        this.passengers.getText();
     }
 
-    set passengers(noOfPassengers){
-         $('(//input[@type="text"])[4]').setValue(noOfPassengers); 
+    selectAdults(adults){
+        this.passengers.click();
+        $('//div[@data-product-type="adult"]').setValue(adults);
+    }
+
+    selectChildren(children){
+        this.passengers.click();
+        $('//div[@data-product-type="children"]').setValue(children);
+    }
+
+    selectBikes(bike_slot){
+        this.passengers.click();
+        $('//div[@data-product-type="bike_slot"]').setValue(bikes);
+    }
+
+    setPassengers(adults=null, children=null, bikes=null){
+        if(adults!=null){
+            this.selectAdults(adults);
+        }
+
+        if(children!=null){
+            this.selectChildren(children);
+        }
+        
+        if(bikes!=null){
+            this.selectBikes(bikes);
+        }
+
+    }
+
+    setTravelDetails(depCity, arrCity, date, pass){
+        this.departureCity(depCity);
+        this.arrivalCity(arrCity);
+        this.departureDate(date);
+        this.passengers(pass);
     }
 
     clickSearchButton(){
-        $('button.flix-btn').click();
+        this.searchButton.click();  
     }
 
 }
