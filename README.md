@@ -7,7 +7,8 @@ chai driver expect assertions are used for making assertions with mocha framewor
 - Node.js
 - npm
 - WebdriverIO
-- Visual Studio Code 
+- Visual Studio Code
+- javaSrript
 
 **BUILD**
 
@@ -15,7 +16,7 @@ chai driver expect assertions are used for making assertions with mocha framewor
 2. Install @wdio/cli test runner npm package. (npm i --save-dev @wdio/cli)
 3. Generate configuration file.(wdio.conf.js)
 4. create package.json file to manager libraries. 
-2. create test cases and run using cmd - npm run test
+2. create test cases and run using - npm run test
 
 
 
