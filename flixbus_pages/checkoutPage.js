@@ -1,11 +1,38 @@
-class checkoutPage{
+class CheckoutPage{
 
-    get departureTime(){
-        return $('span.flix-connection__title-departure').getText();
+    get checkoutSection(){
+        return $('.flix-checkout-section-cart h2');
     }
 
-    get noOfPassengers(){
+    get departureCity(){
+        return  $('(//tbody//tr)[1]');
+    }
+
+    get arrivalCity(){
+        return  $('(//tbody//tr)[2]');
+    }
+
+    getDepartureDate(){
+         var depDate = $('span.flix-connection__title-departure').getHTML(false);
+         console.log("before changing: " + depDate )
+         depDate = depDate.substring(5,11);
+         console.log("Retrieved Departure Date is: " + depDate);
+         return depDate;
+    }
+
+    getDepartureCity(){
+        return  this.departureCity.getText();
+       
+    }
+
+    getArrivalCity(){
+        return this.arrivalCity.getText();
+    }
+
+    getNoOfPassengers(){
         return $('div.flix-cart-item>span').getText();
     }
 
 }
+
+module.exports = new CheckoutPage();

@@ -26,6 +26,10 @@ class CodeReedeemPage{
         return $('(//input[@value="Reserve 1 Seat"])[2]');
     }
 
+    get shoppingCart(){
+        return $('h2');
+    }
+
     get bookButton(){
         return $('#book-button');
     }
@@ -43,10 +47,13 @@ class CodeReedeemPage{
     }
 
     clickReserveButton(){
-        if(this.reserveSeatButton){
-            
-        }
+        this.reserveSeatButton.click();
     }
+
+    clickBookButton(){
+        this.bookButton.click();
+    }
+
 
 }
 

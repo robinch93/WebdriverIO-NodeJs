@@ -1,6 +1,8 @@
 
 const searchPage = require("../flixbus_pages/searchPage")
 const codeReedeem = require("../flixbus_pages/codeReedemPage")
+const methods = require("../flixbus_test/methods")
+
 
 describe("Verify Travel Details: ", function(){
 
@@ -23,7 +25,7 @@ describe("Verify Travel Details: ", function(){
     it("verify redirection to code reedem page", function(){ 
         codeReedeem.waitForCodeReedeemToLoad(); 
         var title = codeReedeem.pageTitle();  
-        expect(title).to.equal("Travel by bus from " + depCity + " to " + arrCity + " on " + swapDate(travelDate))
+        expect(title).to.equal("Travel by bus from " + depCity + " to " + arrCity + " on " + methods.swapDate(travelDate))
     });
 
     it("verify departure label on code reedem page", function(){ 
@@ -42,25 +44,10 @@ describe("Verify Travel Details: ", function(){
 
     it("verify active date on code reedem page", function(){ 
         let activeDate = codeReedeem.getActiveDate();
-        let formatedDate = formatDate(travelDate);
+        let formatedDate = methods.formatDate(travelDate);
         console.log("Active Date: " + activeDate + ": Formated date: " + formatedDate);
         assert.equal(activeDate.replace(/\s/g,''), formatedDate.replace(/\s/g,''));
     });
 
 });
 
-function swapDate(date) {
-    var day = date.substring(8,10);
-    var month = date.substring(5,7);
-    var year = date.substring(0,4);
-    var swappedDate = day + '.' + month + '.' + year;
-    return swappedDate;
-}
-
-function formatDate(inputDate){
-    const date = new Date(inputDate);
-    var day = date.getDate();
-    var shortMonth = date.toLocaleString('default', { month: 'short' });
-    var formatedDate = day + " " + shortMonth;
-    return formatedDate;
-}

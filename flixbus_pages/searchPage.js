@@ -109,11 +109,10 @@ class SearchPage{
 
     }
 
-    setTravelDetails(depCity, arrCity, date, pass){
-        this.departureCity(depCity);
-        this.arrivalCity(arrCity);
-        this.departureDate(date);
-        this.passengers(pass);
+    setTravelDetails(depCity, arrCity, date){
+        this.setDepartureCity(depCity)
+        this.setArrivalCity(arrCity);
+        this.setDepartureDate(date);
     }
 
     clickSearchButton(){
