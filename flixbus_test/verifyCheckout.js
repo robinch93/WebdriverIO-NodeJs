@@ -2,35 +2,36 @@
 const searchPage = require("../flixbus_pages/searchPage")
 const codeReedeem = require("../flixbus_pages/codeReedemPage")
 const checkout = require("../flixbus_pages/checkoutPage");
-const methods = require("../flixbus_test/methods");
+const utils = require("../flixbus_test/utils");
+const moment = require('moment')
 
-describe("Verify Checkout Details: ", function(){
+describe("Verify Checkout Details: ", function () {
 
-    var depCity = "Rome";
+    var depCity = "Venice";
     var arrCity = "Turin";
-    var travelDate = "2020-06-20";
+    var travelDate = moment(travelDate).add(5, "days").format("YYYY-MM-DD");
 
-    it("verify shopping cart is visible", function(){
-        browser.url('https://global.flixbus.com/');
-        browser.pause(2000);
+    before(() => {
+        browser.url('https://global.flixbus.com/')
+    })
+
+    it("verify search results list is visible", function () {
         searchPage.handleCookiesBanner();
         searchPage.setTravelDetails(depCity, arrCity, travelDate)
         searchPage.clickSearchButton();
-        expect(codeReedeem.shoppingCart.getText()).to.equal("Shopping Cart");
+        codeReedeem.waitForCodeReedeemToLoad()
+        expect(codeReedeem.getSearchResultList()).to.be.greaterThan(0);
     });
 
-    it("verify your order details are visible", function(){ 
-       codeReedeem.clickReserveButton();
-       browser.pause(2000);
-       codeReedeem.clickBookButton();
-       browser.pause(2000);
-       expect(checkout.checkoutSection.getText()).to.equal("Your Order");
+    it("verify your order details are visible", function () {
+        codeReedeem.clickReserveButton();
+        expect(checkout.getCheckoutSectionText()).to.equal("Your booking");
     });
 
-    it("verify order details", function(){ 
+    it("verify booking details", function () {
         assert.ok(checkout.getDepartureCity().includes(depCity));
         assert.ok(checkout.getArrivalCity().includes(arrCity));
-        expect(checkout.getDepartureDate()).to.equal(methods.formatDate(travelDate));
+        expect(checkout.getDepartureDate()).to.equal(utils.formatDate(travelDate));
     });
 
 });

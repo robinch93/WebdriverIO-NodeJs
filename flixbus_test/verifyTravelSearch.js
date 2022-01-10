@@ -1,52 +1,55 @@
 
 const searchPage = require("../flixbus_pages/searchPage")
 const codeReedeem = require("../flixbus_pages/codeReedemPage")
-const methods = require("../flixbus_test/methods")
+const utils = require("../flixbus_test/utils")
+const moment = require('moment')
 
 
-describe("Verify Travel Details: ", function(){
+describe("Verify Travel Details: ", function () {
 
     var depCity = "Turin";
-    var arrCity = "Rome";
-    var travelDate = "2020-06-13";
+    var arrCity = "Venice";
+    var travelDate = moment(travelDate).add(5, "days").format("YYYY-MM-DD");
 
-    it("verify travel details on search page", function(){
-        browser.url('https://global.flixbus.com/');
-        browser.pause(2000);
+    before(() => {
+        browser.url('https://global.flixbus.com/')
+    })
+
+
+    it("verify travel details on search page", function () {
         searchPage.handleCookiesBanner();
-        searchPage.setDepartureCity(depCity); 
-        searchPage.setArrivalCity(arrCity); 
+        searchPage.setDepartureCity(depCity);
+        searchPage.setArrivalCity(arrCity);
         searchPage.setDepartureDate(travelDate);
         expect(searchPage.getDepartureCity()).to.equal(depCity);
         expect(searchPage.getArrivalCity()).to.equal(arrCity);
         searchPage.clickSearchButton();
     });
 
-    it("verify redirection to code reedem page", function(){ 
-        codeReedeem.waitForCodeReedeemToLoad(); 
-        var title = codeReedeem.pageTitle();  
-        expect(title).to.equal("Travel by bus from " + depCity + " to " + arrCity + " on " + methods.swapDate(travelDate))
+    it("verify redirection to code reedem page", function () {
+        codeReedeem.waitForCodeReedeemToLoad();
+        var title = codeReedeem.pageTitle();
+        console.log('page title is: ', title)
+        expect(title).to.equal("Travel by bus from " + depCity + " to " + arrCity + " on " + utils.formatDate(travelDate))
     });
 
-    it("verify departure label on code reedem page", function(){ 
-        browser.pause(1000);
+    it("verify departure label on code reedem page", function () {
         var depLabelText = codeReedeem.getDepartureLabel();
         console.log("DepTxt: " + depLabelText);
-        assert.equal(depLabelText, "Departure from " + depCity);
+        assert.equal(depLabelText, "Departure from: " + depCity);
     });
 
-    it("verify arrival label on code reedem page", function(){ 
-        browser.pause(1000);
+    it("verify arrival label on code reedem page", function () {
         var arrivalText = codeReedeem.getArrivalLabel();
         console.log("ArrTxt: " + arrivalText);
-        expect(arrivalText).to.equal("Arrival in " + arrCity);
+        expect(arrivalText).to.equal("Arrival in: " + arrCity);
     });
 
-    it("verify active date on code reedem page", function(){ 
+    it("verify active date on code reedem page", function () {
         let activeDate = codeReedeem.getActiveDate();
-        let formatedDate = methods.formatDate(travelDate);
+        let formatedDate = utils.formatDate(travelDate);
         console.log("Active Date: " + activeDate + ": Formated date: " + formatedDate);
-        assert.equal(activeDate.replace(/\s/g,''), formatedDate.replace(/\s/g,''));
+        assert.equal(activeDate.replace(/\s/g, ''), formatedDate.replace(/\s/g, ''));
     });
 
 });

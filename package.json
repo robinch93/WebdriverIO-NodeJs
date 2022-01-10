@@ -4,7 +4,9 @@
   "description": "scripts for webdriver io",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/wdio ./wdio.conf.js"
+    "test": "wdio wdio.conf.js",
+    "test travel": "npm test -- --spec ./flixbus_test/verifyTravelSearch.js",
+    "test checkout": "npm test -- --spec ./flixbus_test/verify.js"
   },
   "author": "robin",
   "license": "ISC",
@@ -17,22 +19,24 @@
   },
   "homepage": "https://github.com/webdriverio/webdriverio#readme",
   "dependencies": {
-    "@types/node": "^14.0.1",
-    "@types/selenium-webdriver": "^4.0.9",
+    "@types/node": "^17.0.8",
+    "@types/selenium-webdriver": "^4.0.16",
     "@types/webdriverio": "^5.0.0",
-    "@wdio/cli": "^6.1.12"
+    "@wdio/cli": "^7.16.12",
+    "allure-commandline": "^2.17.2",
+    "moment": "^2.29.1"
   },
   "devDependencies": {
-    "@wdio/allure-reporter": "^6.1.12",
-    "@wdio/local-runner": "^6.1.12",
-    "@wdio/mocha-framework": "^6.1.8",
-    "@wdio/selenium-standalone-service": "^6.1.13",
-    "@wdio/spec-reporter": "^6.1.12",
-    "@wdio/sync": "^6.1.8",
-    "chai": "^4.2.0",
+    "@wdio/allure-reporter": "^7.16.11",
+    "@wdio/local-runner": "^7.16.12",
+    "@wdio/mocha-framework": "^7.16.11",
+    "@wdio/selenium-standalone-service": "^7.16.11",
+    "@wdio/spec-reporter": "^7.16.11",
+    "@wdio/sync": "^7.16.12",
+    "chai": "^4.3.4",
     "chai-webdriverio": "^1.0.0",
-    "chromedriver": "^81.0.0",
+    "chromedriver": "^97.0.0",
     "local-runner": "^0.1.1-alpha",
-    "webdriverio": "^6.1.12"
+    "webdriverio": "^7.16.12"
   }
 }

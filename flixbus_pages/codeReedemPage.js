@@ -1,59 +1,52 @@
-class CodeReedeemPage{
+class CodeReedeemPage {
 
-    get sortBy(){ return $('#search-results-sort-items') }
+    get sortBy() { return $('label.flix-label') }
 
-    waitForCodeReedeemToLoad () {
-        if(!this.sortBy.isDisplayed()){
-          this.sortBy.waitForDisplayed(5000);
-        }
-      }
-    
+    waitForCodeReedeemToLoad() {
+        this.sortBy.waitForDisplayed({ timeout: 3000 });
+    }
+
     pageTitle() { return browser.getTitle(); }
 
-    get departureFromLabel(){
-        return $('label[for=direct_departure_time_slider]');
+    get departureFromLabel() {
+        return $('(//label[@class="TimeSliderFilter__title___InJhl"])[1]');
     }
 
-    get arrivalInLabel(){
-        return $('label[for=direct_arrival_time_slider]');
+    get arrivalInLabel() {
+        return $('(//label[@class="TimeSliderFilter__title___InJhl"])[2]');
     }
 
-    get activeDate(){
-        return $('a.active strong');
+    get activeDate() {
+        return $('a.DatePicker__datePickerItemActive___MWf46');
     }
 
-    get reserveSeatButton(){
-        return $('(//input[@value="Reserve 1 Seat"])[2]');
+    get reserveSeatButton() {
+        return $('(//button[@data-e2e="button-reserve-trip"])[1]');
     }
 
-    get shoppingCart(){
-        return $('h2');
+    get searchResultItems() {
+        return $$('//div[@data-e2e="search-result-list"]//div');
     }
 
-    get bookButton(){
-        return $('#book-button');
+    getSearchResultList() {
+        return this.searchResultItems.length
     }
 
-    getDepartureLabel(){
+    getDepartureLabel() {
         return this.departureFromLabel.getText();
     }
 
-    getArrivalLabel(){
+    getArrivalLabel() {
         return this.arrivalInLabel.getText();
     }
 
-    getActiveDate(){
-        return this.activeDate.getHTML(false);
+    getActiveDate() {
+        return this.activeDate.getText();
     }
 
-    clickReserveButton(){
+    clickReserveButton() {
         this.reserveSeatButton.click();
     }
-
-    clickBookButton(){
-        this.bookButton.click();
-    }
-
 
 }
 
