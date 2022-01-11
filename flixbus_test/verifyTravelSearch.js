@@ -1,7 +1,7 @@
 
 const searchPage = require("../flixbus_pages/searchPage")
 const codeReedeem = require("../flixbus_pages/codeReedemPage")
-const utils = require("../flixbus_test/utils")
+const utils = require("./utils")
 const moment = require('moment')
 
 
@@ -13,8 +13,8 @@ describe("Verify Travel Details: ", function () {
 
     before(() => {
         browser.url('https://global.flixbus.com/')
+        browser.maximizeWindow()
     })
-
 
     it("verify travel details on search page", function () {
         searchPage.handleCookiesBanner();

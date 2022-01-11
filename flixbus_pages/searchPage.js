@@ -10,8 +10,6 @@ class SearchPage {
 
     get pageTitle() { return browser.getTitle(); }
 
-    get cookieBanner() { return $$(`sc-gsTEea frUvwj`); }
-
     get departureCity() { return $('//div[@data-e2e="departure-city-input-field"]//div//input'); }
 
     get arrivalCity() { return $('//div[@data-e2e="arrival-city-input-field"]//div//input'); }
@@ -32,12 +30,9 @@ class SearchPage {
 
     handleCookiesBanner() {
         browser.pause(1000)
-        var existBanner = this.cookieBanner.length;
-        console.log('banner exist: ', existBanner)
-        if (existBanner > 0) {
-            console.log("count is :" + existBanner);
-            this.cookieBanner.click();
-        }
+        browser.execute(() => {
+            document.querySelector('#usercentrics-root').shadowRoot.querySelector('.sc-gsTEea.frUvwj').click()
+        })
     }
 
     getDepartureCity() {
@@ -45,6 +40,7 @@ class SearchPage {
     }
 
     setDepartureCity(departureCity) {
+        this.departureCity.waitForDisplayed()
         this.departureCity.setValue(departureCity);
         this.dropdownList.waitForDisplayed()
         this.dropdownList.click();
@@ -56,6 +52,7 @@ class SearchPage {
     }
 
     setArrivalCity(arrivalCity) {
+        this.arrivalCity.waitForDisplayed()
         this.arrivalCity.setValue(arrivalCity);
         this.dropdownList.waitForDisplayed()
         this.dropdownList.click();

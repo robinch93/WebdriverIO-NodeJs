@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "wdio wdio.conf.js",
-    "test travel": "npm test -- --spec ./flixbus_test/verifyTravelSearch.js",
-    "test checkout": "npm test -- --spec ./flixbus_test/verify.js"
+    "test_travel": "wdio wdio.conf.js --suite travel",
+    "test_checkout": "wdio wdio.conf.js --suite checkout"
   },
   "author": "robin",
   "license": "ISC",
@@ -24,7 +24,8 @@
     "@types/webdriverio": "^5.0.0",
     "@wdio/cli": "^7.16.12",
     "allure-commandline": "^2.17.2",
-    "moment": "^2.29.1"
+    "moment": "^2.29.1",
+    "wdio-chromedriver-service": "^7.2.6"
   },
   "devDependencies": {
     "@wdio/allure-reporter": "^7.16.11",
