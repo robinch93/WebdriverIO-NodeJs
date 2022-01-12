@@ -57,13 +57,16 @@ exports.config = {
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
     capabilities: [{
-        maxInstances: 1,
+        maxInstances: 2,
         browserName: 'chrome',
         'goog:chromeOptions': {
             args: [
-                // "--headless",
+                "--headless",
                 "--disable-gpu",
-                "--sandbox"]
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+                '--window-size=1920,1080'
+            ]
         }
     }],
     //

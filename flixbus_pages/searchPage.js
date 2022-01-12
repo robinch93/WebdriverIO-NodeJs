@@ -14,7 +14,7 @@ class SearchPage {
 
     get arrivalCity() { return $('//div[@data-e2e="arrival-city-input-field"]//div//input'); }
 
-    get dropdownList() { return $('.TTilU'); }
+    get dropdownList() { return $('.pVGAc'); }
 
     get departureDate() { return $('//input[@data-e2e="departure-date-input-field"]'); }
 
@@ -31,7 +31,10 @@ class SearchPage {
     handleCookiesBanner() {
         browser.pause(1000)
         browser.execute(() => {
-            document.querySelector('#usercentrics-root').shadowRoot.querySelector('.sc-gsTEea.frUvwj').click()
+            const cookieBanner = document.querySelector('#usercentrics-root').shadowRoot.querySelector('.gSmhlT')
+            if (cookieBanner != null) {
+                cookieBanner.click()
+            }
         })
     }
 

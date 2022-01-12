@@ -34,6 +34,7 @@ describe("Verify Travel Details: ", function () {
     });
 
     it("verify departure label on code reedem page", function () {
+        codeReedeem.waitForCodeReedeemToLoad()
         var depLabelText = codeReedeem.getDepartureLabel();
         console.log("DepTxt: " + depLabelText);
         assert.equal(depLabelText, "Departure from: " + depCity);

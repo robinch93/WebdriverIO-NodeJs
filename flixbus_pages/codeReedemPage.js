@@ -1,9 +1,11 @@
+const { urlToHttpOptions } = require("url");
+
 class CodeReedeemPage {
 
     get sortBy() { return $('label.flix-label') }
 
     waitForCodeReedeemToLoad() {
-        this.sortBy.waitForDisplayed({ timeout: 3000 });
+        this.sortBy.waitForDisplayed({ timeout: 5000 });
     }
 
     pageTitle() { return browser.getTitle(); }
@@ -33,10 +35,12 @@ class CodeReedeemPage {
     }
 
     getDepartureLabel() {
+        this.departureFromLabel.waitForDisplayed()
         return this.departureFromLabel.getText();
     }
 
     getArrivalLabel() {
+        this.arrivalInLabel.waitForDisplayed()
         return this.arrivalInLabel.getText();
     }
 

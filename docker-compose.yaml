@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  node:
+    build: .
+    container_name: nodejs
+    command: sh -c "npm install -g nodemon && nodemon *.js"
+    command: tail -f /dev/null
+    networks:
+      - test
+
+networks:
+  test:
