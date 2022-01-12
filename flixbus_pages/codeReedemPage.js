@@ -19,7 +19,7 @@ class CodeReedeemPage {
     }
 
     get activeDate() {
-        return $('a.DatePicker__datePickerItemActive___MWf46');
+        return $("a[class='flix-pager__item DatePicker__datePickerItem___PWkQM DatePicker__datePickerItemActive___MWf46'] span[class='DatePicker__day___U7Rhg DatePicker__dayWithPrice___uaPDy']");
     }
 
     get reserveSeatButton() {

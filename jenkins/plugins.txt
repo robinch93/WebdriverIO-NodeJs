@@ -13,3 +13,4 @@ job-dsl:latest
 workflow-job:latest
 workflow-cps:latest
 nodejs:latest
+chromedriver:latest
