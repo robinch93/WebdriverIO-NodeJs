@@ -24,7 +24,7 @@
     "@types/webdriverio": "^5.0.0",
     "@wdio/cli": "^7.16.12",
     "allure-commandline": "^2.17.2",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "wdio-chromedriver-service": "^7.2.6"
   },
   "devDependencies": {
