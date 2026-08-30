@@ -36,7 +36,7 @@
     "@wdio/sync": "^7.16.12",
     "chai": "^4.3.4",
     "chai-webdriverio": "^1.0.0",
-    "chromedriver": "^97.0.0",
+    "chromedriver": "^151.0.5",
     "local-runner": "^0.1.1-alpha",
     "webdriverio": "^7.16.12"
   }
